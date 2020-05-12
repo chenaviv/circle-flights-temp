@@ -1,4 +1,4 @@
-const planePath = 'M406.948 45.65c-27.904 38.297-57.447 79.104-85.135 117.442-86.405 0.583-170.711-1.485-257.106-1.085-7.045 9.799-14.131 19.6-21.207 29.369 71.414 18.535 142.786 37.059 214.19 55.593-23.296 31.222-44.329 64.123-57.231 102.82-38.922 1.464-78.059 3.134-117.013 4.782-4.362 5.837-8.745 11.868-12.912 17.93 35.819 12.278 77.875 15.175 113.684 27.269 22.282 31.017 27.269 66.837 49.552 97.628 4.567-4.598 18.514-15.596 23.091-20.224-10.608-37.663-19.774-64.103-30.403-101.775 33.526-27.269 60.16-59.341 80.158-96.615 37.673 60.631 75.151 120.976 112.834 181.545 6.656-7.906 13.538-15.596 20.194-23.317-26.010-79.524-52.050-159.027-78.049-238.776 42.67-57.252 118.866-121.579 105.339-183.613-22.507-0.809-43.755 12.083-59.986 31.027z'
+const planePath = 'M8.902 4.098v-.346c0-1.145.124-3.69-1.177-3.69-1.301 0-1.177 2.545-1.177 3.69v.346c-.865.472-4.104 2.634-4.646 2.995C.31 8.155.094 9.603 1.277 9.196c1.032-.355 4.374-1.498 5.27-1.8l.205 3.51s-.993.638-1.387 1.365v.99l2.068-.85h.584l2.068.85v-.99c-.395-.727-1.387-1.365-1.387-1.365l.204-3.51c.897.302 4.239 1.445 5.271 1.8 1.183.406.967-1.041-.625-2.103-.543-.361-3.781-2.523-4.646-2.995z'
 
 var width = 1200,
     height = 900;
@@ -28,9 +28,10 @@ function stripWhitespace(str) {
     return str.replace(' ', '');
 }
 
-var svg = d3.select('body').append('svg')
+var svg = d3.select('.globe-container').append('svg')
     .attr('width', width)
     .attr('height', height)
+    .attr('viewBox', `0 0 ${width} ${height}`)
 
 svg.call(d3.drag()
     .on('start', dragstarted)
@@ -43,6 +44,8 @@ queue()
 
 function ready(error, world, data) {
 
+
+    const routes = data.routes;
     const globe = svg.append('g').attr('class', 'globe')
 
     globe.append('circle')
@@ -68,28 +71,16 @@ function ready(error, world, data) {
     // svg.append('g')
     // .attr('class', 'points')
     //     .selectAll('text')
-    //     .data(data.routes)
+    //     .data(routes)
     //     .enter()
     //     .append('path')
     //     .attr('class', 'point')
     //     .attr('d', path);
 
-    // svg.append('g')
-    //     .attr('class', 'planes')
-    //     .append('path')
-    //     .attr('class', 'plane')
-    //     .attr('d', planePath)
-    //     .append('animateMotion')
-    //     .attr('dur', '8s')
-    //     .attr('repeatCount', 'indefinite')
-    //     .append('mpath')
-    //     .attr('xlink:href', 'newyork')
-
-
     svg.append('g')
         .attr('class', 'lines')
         .selectAll('text')
-        .data(data.routes)
+        .data(routes)
         .enter()
         .append('path')
         .attr('class', 'lines')
@@ -97,9 +88,23 @@ function ready(error, world, data) {
         .attr('d', d => lineToIsrael(d));
 
 
+    svg.append('g')
+        .attr('class', 'planes')
+        .selectAll('text')
+        .data(routes)
+        .enter()
+        .append('path')
+        .attr('class', 'plane')
+        .attr('d', planePath)
+        .style('background', `red`)
+        .style('offset-path', d => `path("${lineToIsrael(d)}")`)
+        .style('transform', 'rotate(94deg) translateX(-6px)');
+
+
+
     svg.append('g').attr('class', 'labels')
         .selectAll('text')
-        .data(data.routes)
+        .data(routes)
         .enter()
         .append('text')
         .attr('class', 'label')
@@ -125,9 +130,11 @@ function ready(error, world, data) {
 
     position_labels();
 
+    createPlanes(routes);
+
     refresh();
 
-    spin();
+    // spin();
 }
 
 
@@ -190,4 +197,21 @@ function dragged() {
         r1 = versor.rotation(q1);
     proj.rotate(r1);
     refresh();
+}
+
+function createPlanes(routes) {
+    routes.forEach(route => {
+        var planeEl = document.createElement('div');
+        planeEl.className = 'plane';
+
+        var path = document.querySelector(`#${stripWhitespace(route.destination)}`);
+
+        if (path) {
+            console.log(path.getAttribute('d'));
+            d = path.getAttribute('d');
+            planeEl.style.offsetPath = `path("${d}")`
+            document.querySelector('.globe-container').appendChild(planeEl);
+        }
+
+    });
 }
