@@ -1,0 +1,58 @@
+.land {
+  fill: white;
+  opacity: 0.5;
+  stroke: #4f2291;
+  stroke-opacity: 1;
+}
+
+.countries path {
+  stroke: #4f2291;
+  stroke-linejoin: round;
+  stroke-width: 0.5;
+  fill: #4f2291;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.lines path {
+  fill: none;
+  stroke: #4f2291;
+  stroke-opacity: 0.3;
+  stroke-dasharray: 5, 5;
+}
+
+circle {
+  stroke: #4f2291;
+}
+
+.graticule {
+  fill: none;
+  stroke: #4f2291;
+  stroke-width: 0.5;
+  opacity: 0.2;
+}
+
+.labels {
+  font: 8px sans-serif;
+  fill: black;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.noclicks {
+  pointer-events: none;
+}
+
+.point {
+  opacity: 0.6;
+}
+
+.plane {
+  position: absolute;
+  width: 16px;
+  transition: offset-distance linear 8s;
+  transform: rotate(-157deg);
+  offset-path: path('M841.099055488023,298.208542048373L835.2818409328133,245.75776615235915L825.0794068136969,197.1136887932733L810.6819076854038,153.18294585452037L801.9909388166636,133.24480738085407L792.3576863771059,114.78432535912924L781.8270892910236,97.8876175578971L770.4482725770104,82.6335067711666L758.27431818076,69.09315311169297L745.3620173488835,57.32972205051743L731.7716056989119,47.39808975134474L717.5664822213815,39.3445870743696L702.8129135248475,33.20678344376768L687.5797247035205,29.013311587105477');
+  offset-distance: 100%;
+  offset-distance: 0;
+}

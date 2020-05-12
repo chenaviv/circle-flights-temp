@@ -1,0 +1,218 @@
+body.is-app {
+  // make sure there is no padding or margin on the body
+  // even when in an iframe/webview
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+// dark-mode tweaks
+.dark-mode {
+    @at-root body#{&},
+    & .corona-stats-container {
+        background-color: $clr8;
+    }
+}
+
+.corona-stats-container {
+    @include to-s-layout {
+        margin: rem(12px) 0 rem(36px);
+        padding: 0 rem(12px);
+
+        .is-app & {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    @include for-s-layout {
+        background-color: #EBF2F5;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 1fr $s-bp 1fr;
+    }
+    @include for-m-layout {
+        grid-template-columns: 1fr $m-bp 1fr;
+    }
+    @include for-l-layout {
+        grid-template-columns: 1fr $l-bp 1fr;
+    }
+    @include for-xl-layout {
+        grid-template-columns: 1fr $xl-width 1fr;
+    }
+}
+
+.corona-stats {
+    grid-column: 2;
+    display: grid;
+    grid-gap: rem(24px);
+    position: relative;
+
+    @include to-s-layout {
+        grid-template-rows: auto auto 0;
+        padding: rem(16px) rem(6px) 0;
+    }
+
+    @include for-s-layout {
+        padding: rem(16px) rem(12px) 0;
+        border-bottom: rem(38px) solid $clr7;
+    }
+
+    @include for-l-layout {
+        grid-template-columns: minmax(400px, auto) 1fr;
+        grid-template-rows: auto 40px;
+        padding: rem(14px) rem(14px) 0;
+        gap: 0;
+    }
+    @include for-xl-layout {
+        grid-template-columns: minmax(480px, auto) 1fr;
+        grid-template-rows: auto 40px;
+        padding: rem(28px) rem(28px) 0;
+    }
+
+    a.corona-link {
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        top: 0; bottom: 0; right: 0; left: 0;
+    }
+}
+
+.corona-israel-container {
+    display: grid;
+    grid-template-columns:  1fr auto;
+
+    grid-gap: rem(12px) 0;
+    @include for-s-layout {
+        grid-row-gap: rem(12px);
+        grid-template-rows:  50px auto;
+    }
+
+    @include for-l-layout {
+        padding-inline-end: 24px;
+        border-left: 2px solid $clr1;
+    }
+
+    @include for-xl-layout {
+        padding-inline-end: 38px;
+        // border-left: 2px solid $clr1;
+    }
+
+    .corona-israel-chart {
+        grid-column: 1 / -1;
+        align-self: flex-end;
+    }
+}
+
+.corona-israel-title {
+    margin-left: rem(12px);
+
+    @include to-s-layout {
+        grid-column: span 2;
+    }
+}
+.corona-israel-stats {
+    @include to-s-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: rem(6px);
+
+        > * {
+          background-color: $clr7;
+        }
+    }
+}
+
+.corona-world-container {
+    display: grid;
+    grid-gap: rem(12px) rem(6px);
+    grid-template-columns: 1fr 1fr;
+
+    @include for-s-layout {
+        grid-template-columns: minmax(180px, auto) 1fr;
+        grid-template-rows: 50px auto;
+        grid-gap: rem(12px) rem(24px);
+    }
+
+    @include for-l-layout {
+        padding-inline-start: 24px;
+    }
+
+    @include for-xl-layout {
+        grid-template-columns:  minmax(240px, auto) 1fr;
+        padding-inline-start: 38px;
+        gap: rem(10px) rem(38px);
+    }
+
+    .el-block {
+        @include for-s-layout {
+            grid-column: 1;
+        }
+    }
+
+    .corona-world-title {
+        grid-column: span 2;
+
+        @include for-s-layout {
+            grid-column: auto;
+        }
+    }
+
+    .countries-table {
+        display: none;
+        grid-column: 2;
+        grid-row: 1 / 4;
+        align-self: stretch;
+
+        @include for-s-layout {
+            display: table;
+        }
+    }
+}
+
+.corona-footer {
+    background-color: #8a021b;
+    border-radius: 24px;
+    color: #fff;
+    padding: 1px 24px;
+    transform: translateY(50%);
+    justify-self: center;
+    align-self: end;
+    grid-column: 1 / -1;
+    white-space: nowrap;
+
+    > *,
+    &:before,
+    &:after {
+      vertical-align: middle;
+    }
+
+    &:before {
+        $size: 10px;
+        animation: liveDotAnim 1s infinite alternate linear;
+        background-color: $clr7;
+        border-radius: 50%;
+        content: '';
+        display: inline-block;
+        height: $size;
+        margin-left: rem(8px);
+        position: relative;
+        width: $size;
+    }
+
+    &:after {
+        content: '›';
+        display: inline-block;
+        font-size: 1.3em;
+        margin-right: rem(6px);
+        position: relative;
+        top: -1px;
+        transform: scale(1.3);
+    }
+}
+
+@keyframes liveDotAnim {
+    0% { opacity: 0; }
+    70% { opacity: 1; }
+    100% { opacity: 1; }
+}

@@ -1,0 +1,82 @@
+.block-title {
+    font-weight: 700;
+    font-size: rem(24px);
+
+    @include for-m-layout {
+        font-size: rem(31px);
+    }
+
+    @include just-l-layout {
+        font-size: rem(24px);
+    }
+
+    @include for-xl-layout {
+        margin-inline-end: 20px;
+    }
+
+    .el-block & {
+        font-size: rem(16px);
+        font-weight: 700;
+        line-height: 1.4;
+        line-height: 30px;
+    }
+}
+
+.stats-block {
+    font-size: rem(14px);
+    font-weight: 700;
+
+    > * {
+
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        padding: rem(6px) rem(16px);
+
+        @include for-s-layout {
+            padding: 0 rem(16px);
+
+            &:not(:last-child) {
+                border-left: solid 1px $clr5;
+            }
+
+            &:last-child {
+                padding-inline-end: 0;
+            }
+        }
+    }
+    .num {
+        font-size: rem(22px);
+        font-weight: 700;
+        color: $clr3;
+
+        @include for-xl-layout {
+            font-size: rem(24px);
+        }
+    }
+
+}
+
+.el-block {
+    background-color: $clr7;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: rem(6px) 0;
+
+    > .num {
+        color: $clr3;
+        font-size: rem(28px);
+        @include for-xl-layout {
+            font-size: rem(36px);
+        }
+    }
+
+    .num-diff {
+        font-size: rem(14px);
+        line-height: 1.4;
+        line-height: 30px;
+    }
+}

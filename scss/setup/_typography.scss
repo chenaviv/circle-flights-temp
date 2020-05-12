@@ -1,0 +1,23 @@
+// Open Sans
+
+@font-face {
+    font-weight: 200;
+    font-display: fallback;
+    src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewLight.woff2") format("woff2"),
+      url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewLight.woff") format("woff");
+    font-family: "Open Sans Hebrew";
+  }
+  @font-face {
+    font-weight: 400;
+    font-display: fallback;
+    src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewRegular.woff2") format("woff2"),
+      url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewRegular.woff") format("woff");
+    font-family: "Open Sans Hebrew";
+  }
+  @font-face {
+    font-weight: 700;
+    font-display: fallback;
+    src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewBold.woff2") format("woff2"),
+      url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewBold.woff") format("woff");
+    font-family: "Open Sans Hebrew";
+  }

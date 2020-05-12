@@ -1,0 +1,310 @@
+@charset "UTF-8";
+/* Breakpoint mixins */
+/* Media  Mixins */
+@font-face {
+  font-weight: 200;
+  font-display: fallback;
+  src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewLight.woff2") format("woff2"), url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewLight.woff") format("woff");
+  font-family: "Open Sans Hebrew"; }
+
+@font-face {
+  font-weight: 400;
+  font-display: fallback;
+  src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewRegular.woff2") format("woff2"), url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewRegular.woff") format("woff");
+  font-family: "Open Sans Hebrew"; }
+
+@font-face {
+  font-weight: 700;
+  font-display: fallback;
+  src: url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewBold.woff2") format("woff2"), url("https://www.haaretz.co.il/static/fonts/OpenSansHebrewBold.woff") format("woff");
+  font-family: "Open Sans Hebrew"; }
+
+body.is-app {
+  margin: 0 !important;
+  padding: 0 !important; }
+
+body.dark-mode,
+.dark-mode .corona-stats-container {
+  background-color: #222; }
+
+@media (max-width: 600px) {
+  .corona-stats-container {
+    margin: 12px 0 36px;
+    padding: 0 12px; }
+    .is-app .corona-stats-container {
+      margin: 0;
+      padding: 0; } }
+
+@media (min-width: 600px) {
+  .corona-stats-container {
+    background-color: #EBF2F5;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 600px 1fr; } }
+
+@media (min-width: 768px) {
+  .corona-stats-container {
+    grid-template-columns: 1fr 768px 1fr; } }
+
+@media (min-width: 1024px) {
+  .corona-stats-container {
+    grid-template-columns: 1fr 1024px 1fr; } }
+
+@media (min-width: 1280px) {
+  .corona-stats-container {
+    grid-template-columns: 1fr 1263px 1fr; } }
+
+.corona-stats {
+  grid-column: 2;
+  display: grid;
+  grid-gap: 24px;
+  position: relative; }
+  @media (max-width: 600px) {
+    .corona-stats {
+      grid-template-rows: auto auto 0;
+      padding: 16px 6px 0; } }
+  @media (min-width: 600px) {
+    .corona-stats {
+      padding: 16px 12px 0;
+      border-bottom: 38px solid #fff; } }
+  @media (min-width: 1024px) {
+    .corona-stats {
+      grid-template-columns: minmax(400px, auto) 1fr;
+      grid-template-rows: auto 40px;
+      padding: 14px 14px 0;
+      gap: 0; } }
+  @media (min-width: 1280px) {
+    .corona-stats {
+      grid-template-columns: minmax(480px, auto) 1fr;
+      grid-template-rows: auto 40px;
+      padding: 28px 28px 0; } }
+  .corona-stats a.corona-link {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0; }
+
+.corona-israel-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 12px 0; }
+  @media (min-width: 600px) {
+    .corona-israel-container {
+      grid-row-gap: 12px;
+      grid-template-rows: 50px auto; } }
+  @media (min-width: 1024px) {
+    .corona-israel-container {
+      padding-inline-end: 24px;
+      border-left: 2px solid #8a021b; } }
+  @media (min-width: 1280px) {
+    .corona-israel-container {
+      padding-inline-end: 38px; } }
+  .corona-israel-container .corona-israel-chart {
+    grid-column: 1 / -1;
+    align-self: flex-end; }
+
+.corona-israel-title {
+  margin-left: 12px; }
+  @media (max-width: 600px) {
+    .corona-israel-title {
+      grid-column: span 2; } }
+
+@media (max-width: 600px) {
+  .corona-israel-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 6px; }
+    .corona-israel-stats > * {
+      background-color: #fff; } }
+
+.corona-world-container {
+  display: grid;
+  grid-gap: 12px 6px;
+  grid-template-columns: 1fr 1fr; }
+  @media (min-width: 600px) {
+    .corona-world-container {
+      grid-template-columns: minmax(180px, auto) 1fr;
+      grid-template-rows: 50px auto;
+      grid-gap: 12px 24px; } }
+  @media (min-width: 1024px) {
+    .corona-world-container {
+      padding-inline-start: 24px; } }
+  @media (min-width: 1280px) {
+    .corona-world-container {
+      grid-template-columns: minmax(240px, auto) 1fr;
+      padding-inline-start: 38px;
+      gap: 10px 38px; } }
+  @media (min-width: 600px) {
+    .corona-world-container .el-block {
+      grid-column: 1; } }
+  .corona-world-container .corona-world-title {
+    grid-column: span 2; }
+    @media (min-width: 600px) {
+      .corona-world-container .corona-world-title {
+        grid-column: auto; } }
+  .corona-world-container .countries-table {
+    display: none;
+    grid-column: 2;
+    grid-row: 1 / 4;
+    align-self: stretch; }
+    @media (min-width: 600px) {
+      .corona-world-container .countries-table {
+        display: table; } }
+
+.corona-footer {
+  background-color: #8a021b;
+  border-radius: 24px;
+  color: #fff;
+  padding: 1px 24px;
+  transform: translateY(50%);
+  justify-self: center;
+  align-self: end;
+  grid-column: 1 / -1;
+  white-space: nowrap; }
+  .corona-footer > *, .corona-footer:before, .corona-footer:after {
+    vertical-align: middle; }
+  .corona-footer:before {
+    animation: liveDotAnim 1s infinite alternate linear;
+    background-color: #fff;
+    border-radius: 50%;
+    content: '';
+    display: inline-block;
+    height: 10px;
+    margin-left: 8px;
+    position: relative;
+    width: 10px; }
+  .corona-footer:after {
+    content: '›';
+    display: inline-block;
+    font-size: 1.3em;
+    margin-right: 6px;
+    position: relative;
+    top: -1px;
+    transform: scale(1.3); }
+
+@keyframes liveDotAnim {
+  0% {
+    opacity: 0; }
+  70% {
+    opacity: 1; }
+  100% {
+    opacity: 1; } }
+
+.corona-stats {
+  font-family: "Open Sans Hebrew", sans-serif;
+  color: #8a021b;
+  background-color: #ebebeb; }
+
+.block-title {
+  font-weight: 700;
+  font-size: 24px; }
+  @media (min-width: 768px) {
+    .block-title {
+      font-size: 31px; } }
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .block-title {
+      font-size: 24px; } }
+  @media (min-width: 1280px) {
+    .block-title {
+      margin-inline-end: 20px; } }
+  .el-block .block-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    line-height: 30px; }
+
+.stats-block {
+  font-size: 14px;
+  font-weight: 700; }
+  .stats-block > * {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 16px; }
+    @media (min-width: 600px) {
+      .stats-block > * {
+        padding: 0 16px; }
+        .stats-block > *:not(:last-child) {
+          border-left: solid 1px #b4b4b4; }
+        .stats-block > *:last-child {
+          padding-inline-end: 0; } }
+  .stats-block .num {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2d2d2d; }
+    @media (min-width: 1280px) {
+      .stats-block .num {
+        font-size: 24px; } }
+
+.el-block {
+  background-color: #fff;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0; }
+  .el-block > .num {
+    color: #2d2d2d;
+    font-size: 28px; }
+    @media (min-width: 1280px) {
+      .el-block > .num {
+        font-size: 36px; } }
+  .el-block .num-diff {
+    font-size: 14px;
+    line-height: 1.4;
+    line-height: 30px; }
+
+.land {
+  fill: white;
+  opacity: 0.5;
+  stroke: #4f2291;
+  stroke-opacity: 1; }
+
+.countries path {
+  stroke: #4f2291;
+  stroke-linejoin: round;
+  stroke-width: 0.5;
+  fill: #4f2291;
+  opacity: 0.1;
+  pointer-events: none; }
+
+.lines path {
+  fill: none;
+  stroke: #4f2291;
+  stroke-opacity: 0.3;
+  stroke-dasharray: 5, 5; }
+
+circle {
+  stroke: #4f2291; }
+
+.graticule {
+  fill: none;
+  stroke: #4f2291;
+  stroke-width: 0.5;
+  opacity: 0.2; }
+
+.labels {
+  font: 8px sans-serif;
+  fill: black;
+  opacity: 1;
+  cursor: pointer; }
+
+.noclicks {
+  pointer-events: none; }
+
+.point {
+  opacity: 0.6; }
+
+.plane {
+  position: absolute;
+  width: 16px;
+  transition: offset-distance linear 8s;
+  transform: rotate(-157deg);
+  offset-path: path("M841.099055488023,298.208542048373L835.2818409328133,245.75776615235915L825.0794068136969,197.1136887932733L810.6819076854038,153.18294585452037L801.9909388166636,133.24480738085407L792.3576863771059,114.78432535912924L781.8270892910236,97.8876175578971L770.4482725770104,82.6335067711666L758.27431818076,69.09315311169297L745.3620173488835,57.32972205051743L731.7716056989119,47.39808975134474L717.5664822213815,39.3445870743696L702.8129135248475,33.20678344376768L687.5797247035205,29.013311587105477");
+  offset-distance: 100%;
+  offset-distance: 0; }

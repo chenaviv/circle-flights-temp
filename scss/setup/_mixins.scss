@@ -1,0 +1,100 @@
+/* Breakpoint mixins */
+
+@mixin for-s-layout {
+  @media (min-width: $s-bp) {
+    @content;
+  }
+}
+@mixin to-s-layout {
+  @media (max-width: $s-bp) {
+    @content;
+  }
+}
+
+@mixin for-m-layout {
+  @media (min-width: $m-bp) {
+    @content;
+  }
+}
+
+@mixin for-l-layout {
+  @media (min-width: $l-bp) {
+    @content;
+  }
+}
+
+@mixin just-l-layout {
+  @media (min-width: $l-bp) and (max-width: $xl-bp) {
+    @content;
+  }
+}
+
+@mixin for-xl-layout {
+  @media (min-width: $xl-bp) {
+    @content;
+  }
+}
+
+/* Media  Mixins */
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  overflow: hidden;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  > img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Mixin for removing hover efects on iphone screen
+@mixin hover-supported {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// Border Mixins
+
+@mixin dashed-border($dashlength, $spacelength, $borderwidth, $color, $position: bottom, $direction: start) {
+  position: relative;
+  padding: $borderwidth * 2 0;
+
+  $per: percentage($dashlength / ($dashlength + $spacelength));
+  background-image: linear-gradient(to right, $color 0%, $color $per, rgba(0, 0, 0, 0) $per);
+  background-position: 0 $position;
+  background-size: ($dashlength + $spacelength) $borderwidth;
+  background-repeat: repeat-x;
+
+  &:before {
+    content: "";
+    display: block;
+    width: $borderwidth;
+    height: $borderwidth * 6;
+    position: absolute;
+    background-color: $color;
+    @if $direction == "start" {
+      right: -$borderwidth;
+      bottom: -($borderwidth * 6) / 2 + ($borderwidth / 2);
+    }
+
+    @if $direction == "end" {
+      left: -$borderwidth;
+      top: -($borderwidth * 6) / 2 + ($borderwidth / 2);
+    }
+  }
+}
