@@ -1,0 +1,59 @@
+.circle-comaprison-container {
+  position: relative;
+  margin: 100vh 0;
+}
+
+.circle-comparison-cat {
+  position: relative;
+  height: 300vh;
+  background-color: rgb(241, 210, 217);
+}
+
+.circle-comparison-subcat {
+  width: 200px;
+  height: 1px;
+  background-color: teal;
+  position: absolute;
+  
+  &[data-col="0"] {
+    top: 100vh;
+    // top: 100px;
+  }
+  &[data-col="1"] {
+    top: 200vh;
+    // top: 200px;
+  }
+}
+
+.circle-comparison-chart-fixer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  padding-top: 10vh;
+}
+
+.circle-comparison-chart {
+  position: sticky;
+  top: 10vh;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 rem(12px);
+}
+
+.circle-comparison-cat-title-container {
+  position: -webkit-sticky;
+  position: sticky;
+  top: rem(12px);
+  z-index: 2;
+  height: 100vh;
+  background-color: rgba(220, 220, 220, 0.5);
+}
+
+.circle-comparison-cat-title {
+  display: inline-block;
+  margin: rem(12px) rem(12px) rem(12px);
+  padding: rem(6px) rem(12px);
+  background-color: #acd2ed;
+}

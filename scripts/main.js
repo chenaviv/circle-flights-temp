@@ -42,6 +42,8 @@ queue()
     .defer(d3.json, 'json/routes.json')
     .await(ready);
 
+circleStats();
+
 function ready(error, world, data) {
 
 

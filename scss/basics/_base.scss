@@ -1,3 +1,20 @@
+html {
+  direction: rtl;
+}
+
+html, body {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Open Sans Hebrew", sans-serif;
+  margin: 0;
+}
+
 .corona-stats {
     font-family: "Open Sans Hebrew", sans-serif;
     color: $clr1;
