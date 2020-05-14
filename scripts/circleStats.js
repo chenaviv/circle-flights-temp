@@ -25,7 +25,8 @@
 function circleStats() {
   console.log('circling');
 
-  const comparisonLabels = [ 'אפריל 2019', 'אפריל 2020', ]
+  const comparisonLabels = [ 'אפריל 2019', 'אפריל 2020', ];
+  const circleColors = [ '#acd2ed', '#fac53f', ]
   const comparisonData = [
     {
       category: 'outboundFlights',
@@ -51,18 +52,28 @@ function circleStats() {
       circleValue: 5500,
       data: [ 999726, 5427, ],
     },
+    {
+      category: 'none',
+      label: 'none',
+      circleValue: 1,
+      data: { 'null': 0, },
+    },
   ];
 
-  const r = 7;
+  const container = document.querySelector('.circle-comaprison-container');
+  const monthAndYear = container.querySelector('.circle-comaprison-month-and-year');
 
-  const container = d3.select('.circle-comparison-chart');
-  const svg = container.append('svg')
+  const r = 7;
+  // const transitionDuration = 1000; // milliseconds
+  const transitionDuration = column => column != null ? 1000 : 300; // milliseconds
+
+  const svg = d3.select('.circle-comparison-chart').append('svg')
     .attr('width', 351)
     .attr('height', '50vh');
   const circleGroup = svg.append('g');
 
-  const circleCount = Math.ceil(6749 / 100);
-  const dataArray = Array(circleCount).fill();
+  let prevCircleCount = 0;
+  // const dataArray = Array(circleCount).fill();
 
   // scales
   const scaleX = d3
@@ -106,66 +117,99 @@ function circleStats() {
 //     .transition()
 //       .attr('fill', 'tomato');
 
-  function updateCircles(category, column) {
+  function updateCircles(column = null, category = 'none') {
+    if (column != null) {
+      monthAndYear.dataset.col = `${column}`;
+    }
+
     const dataEntry = comparisonData.find(d => d.category === category);
     const figure = dataEntry.data[column];
 
     const circleCount = Math.ceil(figure / dataEntry.circleValue);
-    const dataArray = Array(circleCount).fill();
+    const transitionBeat = Math.min(transitionDuration(column) / Math.max(prevCircleCount, circleCount), 30);
+    const updateTransitionStart = Math.max(prevCircleCount - circleCount, 0) * transitionBeat
+    console.log('*** length', {circleCount, 'prevCircleCount - circleCount': prevCircleCount - circleCount});
+    prevCircleCount = circleCount
 
     const circles = circleGroup
       .selectAll('circle')
-      .data(dataArray);
+      .data(Array(circleCount).fill());
 
     circles
       .enter()
       .append('circle')
       .attr('r', 10)
-      .attr('fill', 'hotpink')
+      // .attr('fill', 'hotpink')
       //   .attr('cx', (d, i) => r + (r * 2 + 12) * (i % 14))
       .attr('cx', (d, i) => scaleX(i % 14))
       .attr('cy', (d, i) => r + (r * 2 + 12) * Math.floor(i / 14))
       .attr('r', 0)
       .attr('stroke-width', 0)
-      .attr('fill', 'hotpink')
+      .attr('fill', circleColors[column])
       .transition()
-          .delay((d, i) => i * 30)
+          .delay((d, i) => i * transitionBeat)
           .attr('r', r);
 
     circles
         .exit()
         .transition()
         .delay((d, i, { length, }) => {
-          console.log('******* d', {d, delay: (length - i - 1) * 30})
-          return (length - i - 1) * 30;
+          // console.log('******* d', {d, length})
+          return (length - i - 1) * transitionBeat;
         })
         .attr('r', 0)
         .remove();
 
-    circles
-        .transition()
-        .attr('r', r)
-        .attr('fill', 'tomato');
+    const updateSelection = circles
+      .transition()
+        // .duration(700)
+        // .delay((d, i, { length, }) => updateTransitionStart && updateTransitionStart + (length - i) * transitionBeat*4)
+        .delay((d, i, { length, }) => updateTransitionStart && updateTransitionStart + (length - i) * 100)
+        .attr('fill', circleColors[column]);
+    
+    if (updateTransitionStart) {
+      updateSelection
+          .attr('r', r * 1.2)
+          .transition()
+            .attr('r', r)
+    }
+    else {
+      updateSelection.attr('r', r);
+    }
   }
     
 
 
+  let activeColumn = null; 
   const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        console.log('**** entry', entry);
-        if (entry.isIntersecting) {
-          const category = entry.target.dataset.cat;
-          const column = +entry.target.dataset.col;
-          console.log('****', { category, column, });
-          updateCircles(category, column);
+    entries.forEach(entry => {
+      console.log('**** entry', entry);
+      const marker = entry.target;
+      if (entry.isIntersecting) {
+        const category = marker.dataset.cat;
+        const column = +marker.dataset.col;
+        console.log('****', { category, column, });
+        container.classList.add('circle-comaprison-container--active');
+
+        activeColumn = column;
+        updateCircles(column, category);
+      }
+      else if (activeColumn != null) {
+        if (
+          (entry.boundingClientRect.top < 0 && marker.dataset.col === '1')
+          || entry.boundingClientRect.top > 0 && marker.dataset.col === '0'
+        ) {
+          container.classList.remove('circle-comaprison-container--active');
+          updateCircles(null)
         }
-      });
+      }
+    });
   });
 
   const markers = document.querySelectorAll('.circle-comparison-subcat');
 
   markers.forEach(marker => {
-      observer.observe(marker);
+    observer.observe(marker);
   })
 };
  

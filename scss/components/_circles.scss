@@ -1,45 +1,61 @@
 .circle-comaprison-container {
   position: relative;
   margin: 100vh 0;
+  background-color: cornflowerblue;
 }
 
 .circle-comparison-cat {
   position: relative;
   height: 300vh;
-  background-color: rgb(241, 210, 217);
+  // background-color: rgb(241, 210, 217);
 }
 
 .circle-comparison-subcat {
-  width: 200px;
+  width: 100%;
   height: 1px;
   background-color: teal;
-  position: absolute;
-  
-  &[data-col="0"] {
-    top: 100vh;
-    // top: 100px;
+
+  // position: absolute;
+  &:not([data-col="0"]) {
+    margin-top: 100vh;
   }
-  &[data-col="1"] {
-    top: 200vh;
-    // top: 200px;
-  }
+  // &[data-col="0"] {
+  //   // top: 100vh;
+  //   // top: 100px;
+  //   margin-top: 0;
+  // }
+  // &[data-col="1"] {
+  //   // top: 200vh;
+  //   // top: 200px;
+  //   margin-top: 100vh;
+
+  // }
 }
 
 .circle-comparison-chart-fixer {
   position: absolute;
   top: 0;
   height: 100%;
-  padding-top: 10vh;
+  width: 100%;
+  padding-top: 2vh;
 }
 
 .circle-comparison-chart {
   position: sticky;
-  top: 10vh;
+  top: 0vh;
   z-index: 1;
   height: 100vh;
   display: flex;
-  align-items: center;
+  max-width: rem(500px);
+  margin: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   padding: 0 rem(12px);
+
+  svg {
+    overflow: visible;
+  }
 }
 
 .circle-comparison-cat-title-container {
@@ -48,7 +64,7 @@
   top: rem(12px);
   z-index: 2;
   height: 100vh;
-  background-color: rgba(220, 220, 220, 0.5);
+  // background-color: rgba(220, 220, 220, 0.5);
 }
 
 .circle-comparison-cat-title {
@@ -56,4 +72,48 @@
   margin: rem(12px) rem(12px) rem(12px);
   padding: rem(6px) rem(12px);
   background-color: #acd2ed;
+}
+
+.circle-comaprison-month-and-year {
+  opacity: 0;
+  transition-duration: 0.6s;
+  // transition-delay: 0.4s;
+
+  
+  .circle-comaprison-container--active & {
+    // transition-delay: 0s;
+    transition-duration: 0.3s;
+    opacity: 1;
+  }
+
+  .circle-comparison-year :first-child,
+  .circle-comparison-year :last-child {
+    opacity: 0;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.46, 0.03, 0.88, 1.39);
+    // transition: 0.4s;
+  }
+
+  .circle-comparison-year :first-child {
+    transform: translateY(-100%);
+  }
+
+  .circle-comparison-year :last-child {
+    transform: translateY(100%);
+  }
+
+  &[data-col="0"] .circle-comparison-year :first-child,
+  &[data-col="1"] .circle-comparison-year :last-child {
+    transform: none;
+    opacity: 1
+  }
+}
+
+.circle-comparison-year {
+  position: relative;
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
