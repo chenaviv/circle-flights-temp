@@ -194,6 +194,19 @@ body.dark-mode,
   100% {
     opacity: 1; } }
 
+html {
+  direction: rtl; }
+
+html, body {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  font-family: "Open Sans Hebrew", sans-serif;
+  margin: 0; }
+
 .corona-stats {
   font-family: "Open Sans Hebrew", sans-serif;
   color: #8a021b;
@@ -312,3 +325,77 @@ circle {
   transform: rotate(-158deg);
   offset-distance: 100%;
   offset-distance: 0; }
+
+.circle-comaprison-container {
+  position: relative;
+  margin: 100vh 0; }
+
+.circle-comparison-cat {
+  position: relative;
+  height: 300vh; }
+
+.circle-comparison-subcat:not([data-col="0"]) {
+  margin-top: 100vh; }
+
+.circle-comparison-chart-fixer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding-top: 2vh; }
+
+.circle-comparison-chart {
+  position: sticky;
+  top: 0vh;
+  z-index: 1;
+  height: 100vh;
+  /* display: flex; */
+  max-width: 500px;
+  margin: auto;
+  /* flex-direction: column; */
+  /* align-items: flex-start; */
+  /* justify-content: center; */
+  padding: 0 12px;
+  padding-top: clamp(13vh, 100px, 200px); }
+  .circle-comparison-chart svg {
+    overflow: visible; }
+
+.circle-comparison-cat-title-container {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 12px;
+  z-index: 2;
+  height: 100vh; }
+
+.circle-comparison-cat-title {
+  display: inline-block;
+  margin: 12px 12px 12px;
+  padding: 6px 12px;
+  background-color: #acd2ed; }
+
+.circle-comaprison-month-and-year {
+  opacity: 0;
+  transition-duration: 0.6s; }
+  .circle-comaprison-container--active .circle-comaprison-month-and-year {
+    transition-duration: 0.3s;
+    opacity: 1; }
+  .circle-comaprison-month-and-year .circle-comparison-year :first-child,
+  .circle-comaprison-month-and-year .circle-comparison-year :last-child {
+    opacity: 0;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.46, 0.03, 0.88, 1.39); }
+  .circle-comaprison-month-and-year .circle-comparison-year :first-child {
+    transform: translateY(-100%); }
+  .circle-comaprison-month-and-year .circle-comparison-year :last-child {
+    transform: translateY(100%); }
+  .circle-comaprison-month-and-year[data-col="0"] .circle-comparison-year :first-child,
+  .circle-comaprison-month-and-year[data-col="1"] .circle-comparison-year :last-child {
+    transform: none;
+    opacity: 1; }
+
+.circle-comparison-year {
+  position: relative; }
+  .circle-comparison-year span {
+    position: absolute;
+    top: 0;
+    right: 0; }

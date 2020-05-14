@@ -13,10 +13,61 @@
 
 <body>
 
-    <div class="globe-container"></div>
+    <div class="globe-container" style="display: none;"></div>
+
+    <div class="circle-comaprison-container">
+        <div class="circle-comparison-chart-fixer">
+            <div class="circle-comparison-chart">
+                <h3 class="circle-comaprison-month-and-year" data-col="0">
+                    אפריל
+                    <span class="circle-comparison-year">
+                        <span data-col="0">&nbsp;2019</span>
+                        <span data-col="1">&nbsp;2020</span>
+                    </span>
+                </h3>
+            </div>
+        </div>
+        <div class="circle-comparison-cat" data-cat="inboundFlights">
+            <div class="circle-comparison-cat-title-container">
+                <h2 class="circle-comparison-cat-title">
+                    טיסות יוצאות
+                </h2>
+            </div>
+            <div class="circle-comparison-subcat" data-cat="inboundFlights" data-col="0"></div>
+            <div class="circle-comparison-subcat" data-cat="inboundFlights" data-col="1"></div>         
+        </div>
+        <div class="circle-comparison-cat" data-cat="inboundPassengers">
+            <div class="circle-comparison-cat-title-container">
+                <h2 class="circle-comparison-cat-title">
+                    נוסעים שהמריאו מישראל
+                </h2>
+            </div>
+            <div class="circle-comparison-subcat" data-cat="inboundPassengers" data-col="0"></div>
+            <div class="circle-comparison-subcat" data-cat="inboundPassengers" data-col="1"></div>
+        </div>
+        <div class="circle-comparison-cat" data-cat="outboundFlights">
+            <div class="circle-comparison-cat-title-container">
+                <h2 class="circle-comparison-cat-title">
+                    טיסות נכנסות
+                </h2>
+            </div>
+            <div class="circle-comparison-subcat" data-cat="outboundFlights" data-col="0"></div>
+            <div class="circle-comparison-subcat" data-cat="outboundFlights" data-col="1"></div>
+        </div>
+        <div class="circle-comparison-cat" data-cat="outboundPassengers">
+            <div class="circle-comparison-cat-title-container">
+                <h2 class="circle-comparison-cat-title">
+                    נוסעים שנחתו בישראל
+                </h2>
+            </div>
+            <div class="circle-comparison-subcat" data-cat="outboundPassengers" data-col="0"></div>
+            <div class="circle-comparison-subcat" data-cat="outboundPassengers" data-col="1"></div>
+        </div>
+    </div>
     
-    <script src="/scripts/versor.js"></script>
-    <script src="/scripts/main.js"></script>
+    <script src="./scripts/versor.js"></script>
+    <script src="./scripts/circleStats.js"></script>
+    <script src="./scripts/main.js"></script>
 </body>
 
 </html>
